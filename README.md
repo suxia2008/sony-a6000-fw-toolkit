@@ -1,1 +1,20 @@
-Sony ILCE-6000 (A6000) firmware unpacking, TPZL repacking and flash experiments — signature check blocks content modification
+# Sony ILCE-6000 (A6000) 固件逆向与安全改机研究
+
+> 个人研究记录：官方固件解包、TPZL 重打包、分区校验、刷写实验与失败复盘。
+>
+> **这个仓库不包含任何 Sony 固件、Sony 工具或相机备份**，只放方法、脚本与结论。
+
+## 结论（TL;DR）
+
+| 项目 | 结果 |
+|---|---|
+| 官方升级包解包 | ✅ `Update_ILCE6000V321.exe` → `FirmwareData_ILCE6000V321.dat`（SHA-256 `29aef21a…8892f`，与公开研究一致） |
+| `.dat` 解密 | ✅ `fwtool.py`（crypter CXD90014） |
+| 分区格式 | TPZL（LZ77）→ 内部 ext2 文件系统 |
+| 重打包 | ✅ 可重建 TPZL，并用 fwtool `pack` 生成 `.dat` |
+| **修改内容后刷入** | ❌ 相机返回 `Invalid data`：**内容有 Sony 签名/完整性校验**，改 `beeplist.txt` 或 daemon 都会被拒 |
+| 官方内容 + 改版本号 | ✅ 可刷入（用于恢复/升级），相机正常启动 |
+
+**一句话**：能拆、能重打包、能刷**官方内容**；但改任何字节都会被签名校验拦下，改 AF 提示音这条路走不通。
+
+## 目录
