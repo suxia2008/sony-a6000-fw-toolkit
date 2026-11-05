@@ -1,5 +1,0 @@
-/* 仅示例片段，非完整文件 */
-/* BeepID_Name, BeepID_Number, MemoryType, FileName, RsrcAcsType, Priority, KindID */
-BEEP_ID_FORCUSLOCK  0x0004  PIN  Dslr_Emnt_FocusLock.bin  AA_RT  3  4
-BEEP_ID_SELECT      0x0008  APP  Dslr_Emnt_T_Select.bin   AA_RT  2  0
-BEEP_ID_TAP         0x0018  APP  Dslr_Emnt_T_Touch.bin    AA_RT  2  0
